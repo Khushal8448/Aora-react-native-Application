@@ -16,7 +16,7 @@ const SignUp = () => {
     password: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { isLoading, setUser, setIsLogged, isLogged } = useGlobalContext();
+  const { setUser, setIsLogged } = useGlobalContext();
 
   const submit = async () => {
     if (!form.username || !form.email || !form.password) {
@@ -29,7 +29,6 @@ const SignUp = () => {
       const result = await creatUser(form.email, form.password, form.username);
       setUser(result);
       setIsLogged(true);
-      // set it to global state...
 
       router.push("/home");
     } catch (error) {
@@ -43,7 +42,11 @@ const SignUp = () => {
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
         <View className="w-full justify-center min-h-[85vh] px-4 my-6">
-          <Image source={images.logo} resizeMode="contain" className="w-[115px] h-[35px]" />
+          <Image
+            source={images.logo}
+            resizeMode="contain"
+            className="w-[115px] h-[35px]"
+          />
           <Text className="text-2xl text-white font-semibold mt-10 font-psemibold">
             Sign up to Aora
           </Text>
@@ -77,8 +80,13 @@ const SignUp = () => {
           />
 
           <View className="justify-center pt-5 flex-row gap-2">
-            <Text className="text-lg text-gray-100 font-pregular">Have an account already?</Text>
-            <Link href="/sign-in" className="text-lg font-psemibold text-secondary">
+            <Text className="text-lg text-gray-100 font-pregular">
+              Have an account already?
+            </Text>
+            <Link
+              href="/sign-in"
+              className="text-lg font-psemibold text-secondary"
+            >
               Sign In
             </Link>
           </View>
